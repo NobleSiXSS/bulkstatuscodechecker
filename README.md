@@ -8,10 +8,10 @@ A bulk status code checker built in go that accepts input from stdin and support
   Concurrency:
   Use the flag -t to specify the number of threads that the program will use.
   
-  Example: `cat urls.txt | bulkstatuscodechecker -t 30` will use 30 threads
+  Example: `cat urls.txt | bulkstatuscodechecker -t 30` will use 30 threads and will be faster
 
 ## Installation: 
-`go get -u github.com/NobleSiXSS/bulkstatuscodechecker`+
+`go get -u github.com/NobleSiXSS/bulkstatuscodechecker`
 
 ## Example:
 
