@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"crypto/tls"
 	"flag"
 	"fmt"
 	"log"
@@ -9,6 +10,7 @@ import (
 	"os"
 	"strings"
 	"sync"
+	"time"
 )
 
 func get(client http.Client, url string) int {
@@ -23,10 +25,12 @@ func get(client http.Client, url string) int {
 }
 
 func main() {
-	var client = http.Client{
+	var client = http.Client {
+		Timeout: time.Second * 7,
 		CheckRedirect: func(req *http.Request, via []*http.Request) error {
 			return http.ErrUseLastResponse
 		}}
+	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
 
 	var numJobs int
 	flag.IntVar(&numJobs,"t", 20, "Number of threads")
@@ -53,7 +57,6 @@ func main() {
 		url := strings.ToLower(buffstdin.Text())
 		urls <- url
 	}
-
 	close(urls)
 	wg.Wait()
 }
