@@ -11,4 +11,21 @@ A bulk status code checker built in go that accepts input from stdin and support
   Example: `cat urls.txt | bulkstatuscodechecker -t 30` will use 30 threads
 
 ## Installation: 
-`go get -u github.com/NobleSiXSS/bulkstatuscodechecker`
+`go get -u github.com/NobleSiXSS/bulkstatuscodechecker`+
+
+## Example:
+
+#### urls.txt
+```
+https://google.com
+https://facebook.com
+https://github.com
+```
+`cat urls.txt | bulkstatuscodechecker`
+
+#### Output
+```
+200 https://github.com
+301 https://google.com
+301 https://facebook.com
+```
