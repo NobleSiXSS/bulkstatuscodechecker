@@ -32,8 +32,6 @@ func main() {
 	flag.IntVar(&numJobs,"t", 20, "Number of threads")
 	flag.Parse()
 
-	fmt.Println(numJobs)
-
 	urls := make(chan string)
 	var wg sync.WaitGroup
 	for i := 0; i < numJobs; i++ {
