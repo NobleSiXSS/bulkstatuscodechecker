@@ -25,13 +25,16 @@ func get(client http.Client, url string) int {
 }
 
 func main() {
+	transCfg := &http.Transport{
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true}, // ignore expired SSL certificates
+	}
+
 	var client = http.Client {
+		Transport: transCfg,
 		Timeout: time.Second * 7,
 		CheckRedirect: func(req *http.Request, via []*http.Request) error {
 			return http.ErrUseLastResponse
 		}}
-	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
-
 	var numJobs int
 	flag.IntVar(&numJobs,"t", 20, "Number of threads")
 	flag.Parse()
